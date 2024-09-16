@@ -76,7 +76,7 @@ app.layout = html.Div([
            "developed commodity markets are for instance with specified commodity "
            "index funds. More financially developed markets tend to have "
            "stronger correlations between commodities."),
-    html.P("The core aim of this resource is to investigate these claims."
+    html.P("The core aim of this resource is to investigate these claims. "
            "The following dashboard presents various visuals and indicators of "
            "the correlation between the three commodities: "
            "Brent Crude Oil, Natural Gas (Henry Hub Spot Price), and Crude Oil "
@@ -87,8 +87,15 @@ app.layout = html.Div([
            "beyond these three commodities towards a more complete picture of "
            "correlation risk. Though this is also intended to aide commodity "
            "market traders in order to test the previously discussed claims. "
-           "As such, multiple time periods must be available for analysis"
-           "in conjuction other live market data."
+           "As such, multiple time periods must be available for analysis "
+           "in conjuction with other live market data. "
+           "Below is the full historical price data provided by the EIA. "
+           "It should be noted that this data is ocassionally incomplete on days. "
+           "This dashboard uses the 'forward fill' method to populate null values "
+           "in the dataset - which just carries over the last previous value. "
+           "One consideration ishould be that inaccuracies become more pronounced over "
+           "shorter time periods, though general trends are precise "
+           "enough for this project's aim."
            ),
 
     # Data refresh button
@@ -101,14 +108,17 @@ app.layout = html.Div([
         interval=60*60*1000,  # Update every hour
         n_intervals=0
     ),
-    html.P("Alongside contextual historical price data, there are two main "
+    html.P("Alongside historical price data, there are two main "
            "indicators: the correlation matrix, and the rolling correlation "
-           "time series. The correlation matrix simply displays the calculate correlation "
+           "time series. The correlation matrix simply displays the calculated correlation "
            "coefficients between all three commodities over the time period in question. "
            "The rolling correlation time series displays how correlation between "
-           "two assets has varied over time. This 'rolling window' is proportional "
-           "towards the specific time period in question. Both depict several "
-           "time periods each to gain a fuller perspective. "
+           "two assets has varied over time. This 'rolling window' set is instrinsically arbitrary "
+           "though it is related to the overall timescale. It is optimal for this window "
+           "to be small enough to observe distinct changes but but large enough such that "
+           "the changes are easily discernible for the viewer. "
+           "Both depict several time periods each to gain a fuller perspective. "
+           " "
            ),
     # Heatmap Row
     html.H2("Correlation Heatmaps"),
@@ -130,7 +140,20 @@ app.layout = html.Div([
     dcc.Graph(id='rolling-correlation-year-to-date'),
     dcc.Graph(id='rolling-correlation-last-5-years'),
 
-
+    html.H2("Bibliography"),
+    html.P(
+        "Chatziantoniou, I., Filis, G. and Gabrielsen, A., 2022. Commodity Correlation Risk. University of Strathclyde Economics Department. [online] Available at: https://www.strath.ac.uk/media/1newwebsite/departmentsubject/economics/research/researchdiscussionpapers/22-11_Commodity_Correlation_Risk.pdf [Accessed 16 September 2024]."),
+    html.P(
+        "Ojeaga, P. and Alege, P., 2022. The impact of renewable energy consumption and environmental quality on economic growth in Africa. Energy Economics, [online] 109, p.105936. Available at: https://www.sciencedirect.com/science/article/abs/pii/S0140988322000408 [Accessed 16 September 2024]."),
+    html.P(
+        "European Central Bank, 2011. Oil prices - their determinants and impact on euro area inflation and the macroeconomy. Monthly Bulletin. [online] Available at: https://www.ecb.europa.eu/pub/pdf/other/mb201110_focus01.en.pdf [Accessed 16 September 2024]."),
+    html.P(
+        "Cao, L., 2008. In-depth Analysis of Commodity Data Using Machine Learning. arXiv. [pdf] Available at: https://arxiv.org/pdf/0803.3884 [Accessed 16 September 2024]."),
+    html.P(
+        "Czapp, 2023. Identifying Relationships in Commodities with Machine Learning. [online] Available at: https://www.czapp.com/explainers/identifying-relationships-in-commodities-with-machine-learning/ [Accessed 16 September 2024]."),
+    html.P(""),
+    html.P(""),
+    html.P("To contact: alexpswaine@icloud.com "),
     # Status message
     html.Div(id='status-message')
 ])
